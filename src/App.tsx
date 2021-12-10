@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 import { DateTime } from 'luxon'
-import Games from './components/Games';
+import Dashboard from './pages/dashboard';
 import { displayLogo } from './utils';
+import { Route, Routes } from 'react-router-dom';
 
 type ITeam = {
   id: number;
@@ -33,6 +34,9 @@ function App() {
   const [teams, setTeams] = useState<ITeam[]>([])
   const [todaysGames, setTodaysGames] = useState<any[]>([])
   const [todaysDate, setTodaysDate] = useState(DateTime.now())
+  const [gameStats, setGameStats] = useState<any[]>([])
+  const [showGameStats, setShowGameStats] = useState(false)
+  const [selectedGame, setSelectedGame] = useState('')
 
   const getTeams = async () => {
     const { data } = await axios.get('https://www.balldontlie.io/api/v1/teams')
@@ -44,9 +48,21 @@ function App() {
     setTodaysGames(data.data)
   }
 
+  const getGameStats = async (selectedGame: string) => {
+    try {
+      const { data } = await axios.get(`https://www.balldontlie.io/api/v1/stats?game_ids[]=${selectedGame}&per_page=100`)
+      setGameStats(data.data)
+      setShowGameStats(preValue => !preValue)
+      console.log('setting...');
+      console.log(data.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   useEffect(() => {
     getTodaysGame()
-  }, [todaysDate])
+  }, [todaysDate, gameStats])
 
   return (
     <div className="mx-auto container">
@@ -60,7 +76,7 @@ function App() {
               <input type="text" placeholder="Search..." className="px-2 py-2 border rounded-md" />
             </div>
 
-            <div className="col-span-full">
+            <div className="col-span-full relative">
               <p className="text-gray-600">{todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
               <div>
                 <div className="flex">
@@ -71,32 +87,29 @@ function App() {
                   <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: 1 })) }}>→</button>
                 </div>
               </div>
-
             </div>
-            {
-              todaysGames && todaysGames.map(({ home_team, home_team_score, visitor_team, visitor_team_score, status, id }) => (
-                <div className="col-span-6" key={id}>
-                  <div className="flex justify-around items-center bg-gray-50 border rounded-sm p-2">
-                    <div className="flex flex-col items-center flex-1">
-                      <img src={displayLogo(home_team.name)} alt={`${home_team.name} logo`} className="w-16" />
-                      <p className="text-sm pt-1 text-gray-700">{home_team.name}</p>
-                    </div>
-                    <div className="flex items-center justify-center flex-1">
-                      <p className={`text-2xl ${home_team_score > visitor_team_score ? 'text-green-500' : 'text-gray-800'}`}>{home_team_score === 0 ? '-' : home_team_score}</p>
-                      <p className="text-gray-700 px-6">{status}</p>
-                      <p className={`text-2xl ${visitor_team_score > home_team_score ? 'text-green-500' : 'text-gray-800'}`}>{visitor_team_score === 0 ? '-' : visitor_team_score}</p>
-                    </div>
-                    <div className="flex flex-col items-center p-4 flex-1">
-                      <img src={displayLogo(visitor_team.name)} alt={`${visitor_team.name} logo`} className="w-16" />
-                      <p className="text-sm pt-1 text-gray-700">{visitor_team.name}</p>
-                    </div>
-                  </div>
-                </div>
-              ))
-            }
+            <Routes>
+              <Route path="/" element={<Dashboard todaysGames={todaysGames} />} />
+            </Routes>
           </div>
+
         </div>
       </div>
+      {
+        showGameStats && <div className="bg-gray-50 absolute mx-auto top-0 right-0 left-0 bottom-0">
+          <button onClick={() => setShowGameStats(preValue => !preValue)}>Close</button>
+          {
+            gameStats && gameStats.map((game) => (
+              <div className="flex">
+                <p className="">{game.player.first_name}</p>
+                <p className="">{game.player.last_name}</p>
+                <p className="">{game.pts}</p>
+                <p className="">{game.team.abbreviation}</p>
+              </div>
+            ))
+          }
+        </div>
+      }
     </div>
   );
 }
