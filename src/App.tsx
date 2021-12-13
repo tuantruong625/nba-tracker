@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { DateTime } from 'luxon'
 import Dashboard from './pages/dashboard';
-import { displayLogo } from './utils';
 import { Route, Routes } from 'react-router-dom';
+import GameStats from './pages/gameStats';
 
 type ITeam = {
   id: number;
@@ -19,22 +19,25 @@ type ITeam = {
 export type IGames = {
   id: number;
   date: string;
-  home_team: {};
-  home_team_score: 0;
+  home_team: {
+    name: string;
+  };
+  home_team_score: number | undefined;
   period: number;
   postseason: boolean;
   season: number;
   status: string;
   time: string;
-  visitor_team: {};
-  visitor_team_score: number
+  visitor_team: {
+    name: string;
+  };
+  visitor_team_score: number | undefined
 }
 
 function App() {
   const [teams, setTeams] = useState<ITeam[]>([])
   const [todaysGames, setTodaysGames] = useState<any[]>([])
   const [todaysDate, setTodaysDate] = useState(DateTime.now())
-  const [gameStats, setGameStats] = useState<any[]>([])
   const [showGameStats, setShowGameStats] = useState(false)
   const [selectedGame, setSelectedGame] = useState('')
 
@@ -48,21 +51,11 @@ function App() {
     setTodaysGames(data.data)
   }
 
-  const getGameStats = async (selectedGame: string) => {
-    try {
-      const { data } = await axios.get(`https://www.balldontlie.io/api/v1/stats?game_ids[]=${selectedGame}&per_page=100`)
-      setGameStats(data.data)
-      setShowGameStats(preValue => !preValue)
-      console.log('setting...');
-      console.log(data.data);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+
 
   useEffect(() => {
     getTodaysGame()
-  }, [todaysDate, gameStats])
+  }, [todaysDate])
 
   return (
     <div className="mx-auto container">
@@ -89,27 +82,15 @@ function App() {
               </div>
             </div>
             <Routes>
-              <Route path="/" element={<Dashboard todaysGames={todaysGames} />} />
+              <Route path="/" element={<Dashboard todaysGames={todaysGames} selectedGame={selectedGame} onSetSelectedGame={setSelectedGame} />} />
+              {/* <Route path={`/game-stats?gameId=${selectedGame}`} element={<GameStats />} /> */}
+              <Route path={`/game-stats/:gameId`} element={<GameStats todaysGames={todaysGames} />} />
             </Routes>
           </div>
 
         </div>
       </div>
-      {
-        showGameStats && <div className="bg-gray-50 absolute mx-auto top-0 right-0 left-0 bottom-0">
-          <button onClick={() => setShowGameStats(preValue => !preValue)}>Close</button>
-          {
-            gameStats && gameStats.map((game) => (
-              <div className="flex">
-                <p className="">{game.player.first_name}</p>
-                <p className="">{game.player.last_name}</p>
-                <p className="">{game.pts}</p>
-                <p className="">{game.team.abbreviation}</p>
-              </div>
-            ))
-          }
-        </div>
-      }
+
     </div>
   );
 }
