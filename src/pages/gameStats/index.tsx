@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import styled from 'styled-components'
 import { IGames } from '../../App'
 import StatsTable from '../../components/StatsTable'
+import TopPerformers from '../../components/TopPerformers'
 import { displayLogo } from '../../utils'
 
 const GameStats = ({ todaysGames }: { todaysGames: any[] }) => {
@@ -61,58 +61,18 @@ const GameStats = ({ todaysGames }: { todaysGames: any[] }) => {
      Top Performers
     </p>
 
-    <div className="col-span-full grid grid-cols-6 gap-4 pt-3 ">
-     <div className="col-span-3 bg-gray-50 p-4 flex items-center border rounded-sm">
-      <p className="text-lg text-gray-700">Fred Van Fleet</p>
-      <span className="px-4 text-xl text-gray-400">|</span>
-      <p className="px-2">
-       <span className="text-gray-700 text-lg">18</span>
-       <span className="text-gray-600 text-xs">PTS</span>
-      </p>
-      <p className="px-2">
-       <span className="text-gray-700 text-lg">8</span>
-       <span className="text-gray-600 text-xs">REB</span>
-      </p>
-      <p className="px-2">
-       <span className="text-gray-700 text-lg">2</span>
-       <span className="text-gray-600 text-xs">AST</span>
-      </p>
-      <p className="px-2">
-       <span className="text-gray-700 text-lg">1</span>
-       <span className="text-gray-600 text-xs">BLK</span>
-      </p>
-     </div>
-
-     <div className="col-span-3 bg-gray-50">
-      <div className="col-span-3 bg-gray-50 p-4 flex items-center border rounded-sm">
-       <p className="text-lg text-gray-700">Fred Van Fleet</p>
-       <span className="px-4 text-xl text-gray-400">|</span>
-       <p className="px-2">
-        <span className="text-gray-700 text-lg">18</span>
-        <span className="text-gray-600 text-xs">PTS</span>
-       </p>
-       <p className="px-2">
-        <span className="text-gray-700 text-lg">8</span>
-        <span className="text-gray-600 text-xs">REB</span>
-       </p>
-       <p className="px-2">
-        <span className="text-gray-700 text-lg">2</span>
-        <span className="text-gray-600 text-xs">AST</span>
-       </p>
-       <p className="px-2">
-        <span className="text-gray-700 text-lg">1</span>
-        <span className="text-gray-600 text-xs">BLK</span>
-       </p>
-      </div>
-     </div>
+    <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
+     <TopPerformers gameStats={gameStats} teamName={game?.home_team.name} />
+     <TopPerformers gameStats={gameStats} teamName={game?.visitor_team.name} />
     </div>
 
+
     <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
-     <div className='overflow-auto col-span-3'>
+     <div className='overflow-auto col-span-3 border rounded'>
       <StatsTable teamName={game?.home_team.name} gameStats={gameStats} />
      </div>
 
-     <div className='overflow-auto col-span-3'>
+     <div className='overflow-auto col-span-3 border rounded'>
       <StatsTable teamName={game?.visitor_team.name} gameStats={gameStats} />
      </div>
     </div>

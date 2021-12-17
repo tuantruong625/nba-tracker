@@ -59,11 +59,11 @@ function App() {
 
   return (
     <div className="mx-auto container">
-      <div className="grid grid-cols-12 h-screen gap-6">
+      <div className="grid grid-cols-12 h-screen gap-6 pb-6">
         <div className="row-span-full col-span-2 bg-gray-100">
           {/* navbar */}
         </div>
-        <div className="col-span-10">
+        <div className="col-span-10 pb-10">
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-full py-5">
               <input type="text" placeholder="Search..." className="px-2 py-2 border rounded-md" />

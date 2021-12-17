@@ -2,7 +2,7 @@ import { Key, ReactChild, ReactFragment, ReactPortal } from "react"
 
 const StatsTable = ({ gameStats, teamName }: { gameStats: any, teamName: any }): JSX.Element => {
  return (
-  <table className=" bg-gray-50 border rounded-sm table-auto text-left">
+  <table className="table-fixed text-left">
    <thead>
     <tr className='text-sm text-gray-700 font-medium '>
      <th className='p-2 '>Player</th>
