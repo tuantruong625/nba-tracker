@@ -1,19 +1,20 @@
 
-import { Dispatch, SetStateAction } from "react"
 import { displayLogo } from "../../utils"
-import { Navigate, useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { GameType } from "../../types";
+import { Dispatch, SetStateAction } from "react";
 
 type GameProps = {
- todaysGames: any[];
- selectedGame: string;
- onSetSelectedGame: any
+ todaysGames: GameType[];
+ onSetSelectedGame: Dispatch<SetStateAction<string>>
 }
-const Games = ({ todaysGames, selectedGame, onSetSelectedGame }: GameProps): JSX.Element => {
+
+const Games = ({ todaysGames, onSetSelectedGame }: GameProps): JSX.Element => {
  return <>
   {
    todaysGames.map(game => (
     <div className="col-span-6" key={game.id}>
-     <Link to={`/game-stats/${game.id}`} className="flex justify-around items-center bg-gray-50 border rounded-sm p-2" onClick={() => onSetSelectedGame(game.id)}>
+     <Link to={`/game-stats/${game.id}`} className="flex justify-around items-center bg-gray-50 border rounded-sm p-2" onClick={() => onSetSelectedGame(game.id.toString())}>
       <div className="flex flex-col items-center flex-1">
        <img src={displayLogo(game.home_team.name)} alt={`${game.home_team.name} logo`} className="w-16" />
        <p className="text-sm pt-1 text-gray-700">{game.home_team.name}</p>

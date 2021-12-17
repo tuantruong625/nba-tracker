@@ -45,7 +45,7 @@ function App() {
               </div>
             </div>
             <Routes>
-              <Route path="/" element={<Dashboard todaysGames={todaysGames} selectedGame={selectedGame} onSetSelectedGame={setSelectedGame} />} />
+              <Route path="/" element={<Dashboard todaysGames={todaysGames} onSetSelectedGame={setSelectedGame} />} />
               <Route path={`/game-stats/:gameId`} element={<GameStats todaysGames={todaysGames} />} />
             </Routes>
           </div>

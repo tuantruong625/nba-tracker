@@ -2,14 +2,14 @@ export type GameType = {
  id: number;
  date: string;
  home_team: TeamDetailsType;
- home_team_score: number | undefined;
+ home_team_score: number;
  period: number;
  postseason: boolean;
  season: number;
  status: string;
  time: string;
  visitor_team: TeamDetailsType;
- visitor_team_score: number | undefined
+ visitor_team_score: number;
 }
 
 export type TeamDetailsType = {
