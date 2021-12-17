@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { IGames } from '../../App'
 import StatsTable from '../../components/StatsTable'
 import TopPerformers from '../../components/TopPerformers'
+import { GameType } from '../../types'
 import { displayLogo } from '../../utils'
 
 const GameStats = ({ todaysGames }: { todaysGames: any[] }) => {
  let params: any = useParams()
  const [gameStats, setGameStats] = useState<any[]>([])
  const [selectedGame, setSelectedGame] = useState(params.gameId)
- const [game, setGame] = useState<IGames>()
+ const [game, setGame] = useState<GameType>()
 
  const getGameStats = async () => {
   try {

@@ -4,54 +4,17 @@ import { DateTime } from 'luxon'
 import Dashboard from './pages/dashboard';
 import { Route, Routes } from 'react-router-dom';
 import GameStats from './pages/gameStats';
-
-type ITeam = {
-  id: number;
-  abbreviation: string;
-  city: string;
-  conference: string;
-  division: string;
-  full_name: string;
-  name: string;
-  img: string;
-}
-
-export type IGames = {
-  id: number;
-  date: string;
-  home_team: {
-    name: string;
-  };
-  home_team_score: number | undefined;
-  period: number;
-  postseason: boolean;
-  season: number;
-  status: string;
-  time: string;
-  visitor_team: {
-    name: string;
-  };
-  visitor_team_score: number | undefined
-}
+import { GameType } from './types';
 
 function App() {
-  const [teams, setTeams] = useState<ITeam[]>([])
-  const [todaysGames, setTodaysGames] = useState<any[]>([])
+  const [todaysGames, setTodaysGames] = useState<GameType[]>([])
   const [todaysDate, setTodaysDate] = useState(DateTime.now())
-  const [showGameStats, setShowGameStats] = useState(false)
   const [selectedGame, setSelectedGame] = useState('')
-
-  const getTeams = async () => {
-    const { data } = await axios.get('https://www.balldontlie.io/api/v1/teams')
-    setTeams(data.data)
-  }
 
   const getTodaysGame = async () => {
     const { data } = await axios.get(`https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=${todaysDate.toFormat('yyyy-MM-d')}&end_date=${todaysDate.toFormat('yyyy-MM-d')}`)
     setTodaysGames(data.data)
   }
-
-
 
   useEffect(() => {
     getTodaysGame()
@@ -83,14 +46,11 @@ function App() {
             </div>
             <Routes>
               <Route path="/" element={<Dashboard todaysGames={todaysGames} selectedGame={selectedGame} onSetSelectedGame={setSelectedGame} />} />
-              {/* <Route path={`/game-stats?gameId=${selectedGame}`} element={<GameStats />} /> */}
               <Route path={`/game-stats/:gameId`} element={<GameStats todaysGames={todaysGames} />} />
             </Routes>
           </div>
-
         </div>
       </div>
-
     </div>
   );
 }
