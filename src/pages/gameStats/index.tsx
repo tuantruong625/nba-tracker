@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import StatsTable from '../../components/StatsTable'
 import TopPerformers from '../../components/TopPerformers'
-import { GameType } from '../../types'
+import { GameStatsType, GameType } from '../../types'
 import { displayLogo } from '../../utils'
 
-const GameStats = ({ todaysGames }: { todaysGames: any[] }) => {
+const GameStats = ({ todaysGames }: { todaysGames: GameType[] }) => {
  let params: any = useParams()
- const [gameStats, setGameStats] = useState<any[]>([])
+ const [gameStats, setGameStats] = useState<GameStatsType[]>([])
  const [selectedGame, setSelectedGame] = useState(params.gameId)
  const [game, setGame] = useState<GameType>()
 
@@ -18,18 +18,8 @@ const GameStats = ({ todaysGames }: { todaysGames: any[] }) => {
     headers: { "Access-Control-Allow-Origin": "*" }
    })
    setGameStats(data.data)
-
   } catch (e) {
-
-  }
- }
-
- const getGame = async () => {
-  try {
-   const { data } = await axios.get(`https://balldontlie.io/api/v1/games/${selectedGame}`)
-   setGame(data.data)
-  } catch (e) {
-
+   console.error(e)
   }
  }
 
@@ -65,7 +55,6 @@ const GameStats = ({ todaysGames }: { todaysGames: any[] }) => {
      <TopPerformers gameStats={gameStats} teamName={game?.home_team.name} />
      <TopPerformers gameStats={gameStats} teamName={game?.visitor_team.name} />
     </div>
-
 
     <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
      <div className='overflow-auto col-span-3 border rounded'>
