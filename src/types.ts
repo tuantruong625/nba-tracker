@@ -18,6 +18,43 @@ export type TeamDetailsType = {
  city: string;
  conference: string;
  division: string;
- full_name: string;
- name: string;
+ full_name: string | undefined;
+ name: string | undefined;
+}
+
+export type PlayerType = {
+ id: 3547207;
+ first_name: string;
+ height_feet: number;
+ height_inches: number;
+ last_name: string;
+ position: string;
+ team_id: number;
+ weight_pounds: number;
+}
+
+export type GameStatsType = {
+ id: number;
+ ast: number;
+ blk: number;
+ dreb: number;
+ fg3_pct: number;
+ fg3a: number;
+ fg3m: number;
+ fg_pct: number;
+ fga: number;
+ fgm: number;
+ ft_pct: number;
+ fta: number;
+ ftm: number;
+ game: GameType;
+ min: string;
+ oreb: string;
+ pf: string;
+ player: PlayerType; 
+ pts: number;
+ reb: number;
+ stl: number;
+ team: TeamDetailsType
+ turnover: number
 }
