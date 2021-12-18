@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react"
+import { GameStatsType, PlayerType } from "../../types"
 
-const TopPerformers = ({ gameStats, teamName }: { gameStats: any, teamName: any }) => {
+type TopPerformersType = {
+ gameStats: GameStatsType[],
+ teamName: string | undefined
+}
+
+const TopPerformers = ({ gameStats, teamName }: TopPerformersType) => {
  const [topPlayer, setTopPlayer] = useState<any>()
 
  useEffect(() => {
