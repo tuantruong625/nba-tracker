@@ -1,4 +1,4 @@
-const TABLE_HEADERS = [
+export const TABLE_HEADERS = [
  'Player',
  'Min',
  'PTS',
@@ -23,9 +23,9 @@ const StatsHeader = () => {
   <thead>
    <tr className='text-sm text-gray-700 font-medium'>
     {
-     TABLE_HEADERS.map(header => {
+     TABLE_HEADERS.map((header, index) => {
       return (
-       <th className="p-2">{header}</th>
+       <th key={index} className="p-2">{header}</th>
       )
      })
     }

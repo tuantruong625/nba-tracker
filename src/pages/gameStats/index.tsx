@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import StatsTable from '../../components/StatsTable'
+import StatsTable from '../../components/StatsTable/index'
 import TopPerformers from '../../components/TopPerformers'
 import { GameStatsType, GameType } from '../../types'
 import { displayLogo } from '../../utils'

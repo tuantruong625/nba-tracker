@@ -25,7 +25,7 @@ const TopPerformers = ({ gameStats, teamName }: TopPerformersType) => {
      <span className="text-gray-600 text-xs">PTS</span>
     </p>
     <p className="px-2">
-     <span className="text-gray-700 text-lg">{topPlayer?.rbs}</span>
+     <span className="text-gray-700 text-lg">{topPlayer?.reb}</span>
      <span className="text-gray-600 text-xs">REB</span>
     </p>
     <p className="px-2">

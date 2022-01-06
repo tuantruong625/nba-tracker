@@ -1,6 +1,6 @@
-import { GameStatsType } from "../../types"
-import StatsBody from "./StatsBody"
-import StatsHeader from "./StatsHeader"
+import { GameStatsType } from "../../../types"
+import StatsBody from "../StatsBody/StatsBody"
+import StatsHeader from "../StatsHeader/StatsHeader"
 
 type StatsProps = {
  gameStats: GameStatsType[];

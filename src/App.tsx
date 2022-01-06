@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { DateTime } from 'luxon'
 import Dashboard from './pages/dashboard';
-import { Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import GameStats from './pages/gameStats';
 import { GameType } from './types';
+import News from './pages/news';
 
 function App() {
   const [todaysGames, setTodaysGames] = useState<GameType[]>([])
@@ -23,9 +24,10 @@ function App() {
   return (
     <div className="mx-auto container">
       <div className="grid grid-cols-12 h-screen gap-6 pb-6">
-        <div className="row-span-full col-span-2 bg-gray-100">
-          {/* navbar */}
-        </div>
+        <nav className="row-span-full col-span-2 bg-gray-100 flex flex-col items-center justify-center">
+          <Link to="/" className="flex justify-around items-center rounded-sm p-2 my-2">Home</Link>
+          <Link to="/news" className="flex justify-around items-center rounded-sm p-2 my-2">News</Link>
+        </nav>
         <div className="col-span-10 pb-10">
           <div className="grid grid-cols-12 gap-6">
             <div className="col-span-full py-5">
@@ -47,6 +49,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Dashboard todaysGames={todaysGames} onSetSelectedGame={setSelectedGame} />} />
               <Route path={`/game-stats/:gameId`} element={<GameStats todaysGames={todaysGames} />} />
+              <Route path="/news" element={<News />} />
             </Routes>
           </div>
         </div>

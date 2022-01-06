@@ -1,4 +1,4 @@
-import { GameStatsType } from "../../types"
+import { GameStatsType } from "../../../types"
 
 type StatsBodyType = {
  gameStats: GameStatsType[],
