@@ -10,15 +10,15 @@ import News from './pages/news';
 function App() {
   const [todaysGames, setTodaysGames] = useState<GameType[]>([])
   const [todaysDate, setTodaysDate] = useState(DateTime.now())
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedGame, setSelectedGame] = useState('')
 
-  const getTodaysGame = async () => {
-    const { data } = await axios.get(`https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=${todaysDate.toFormat('yyyy-MM-d')}&end_date=${todaysDate.toFormat('yyyy-MM-d')}`)
-    setTodaysGames(data.data)
-  }
-
   useEffect(() => {
-    getTodaysGame()
+    (async () => {
+      const { data } = await axios.get(`https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=${todaysDate.toFormat('yyyy-MM-d')}&end_date=${todaysDate.toFormat('yyyy-MM-d')}`)
+      setTodaysGames(data.data)
+
+    })()
   }, [todaysDate])
 
   return (
