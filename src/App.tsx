@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { DateTime } from 'luxon'
 import Dashboard from './pages/dashboard';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import GameStats from './pages/gameStats';
 import { GameType } from './types';
 import News from './pages/news';
@@ -12,6 +12,7 @@ function App() {
   const [todaysDate, setTodaysDate] = useState(DateTime.now())
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedGame, setSelectedGame] = useState('')
+  const location = useLocation()
 
   useEffect(() => {
     (async () => {
@@ -37,11 +38,17 @@ function App() {
               <p className="text-gray-600">{todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
               <div>
                 <div className="flex">
-                  <button onClick={() => { setTodaysDate(DateTime.now()) }}>
-                    <h1 className="text-3xl font-bold mr-4">Today's Games</h1>
-                  </button>
-                  <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: -1 })) }}>←</button>
-                  <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: 1 })) }}>→</button>
+                  {
+                    location.pathname === '/' ?
+                      <>
+                        <button onClick={() => { setTodaysDate(DateTime.now()) }}>
+                          <h1 className="text-3xl font-bold mr-4">Today's Games</h1>
+                        </button>
+                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: -1 })) }}>←</button>
+                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: 1 })) }}>→</button>
+                      </>
+                      : <h1 className="text-3xl font-bold mr-4">Today's News</h1>
+                  }
                 </div>
               </div>
             </div>
