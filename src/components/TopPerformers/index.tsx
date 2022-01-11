@@ -13,7 +13,7 @@ const TopPerformers = ({ gameStats, teamName }: TopPerformersType) => {
   if (gameStats) {
    setTopPlayer(gameStats.filter((team: { team: { name: any } }) => team.team.name === teamName).sort((a: { pts: number; }, b: { pts: number; }) => b.pts - a.pts)[0])
   }
- }, [topPlayer, gameStats])
+ }, [topPlayer, gameStats, teamName])
 
  return (
   <div className="col-span-3 bg-gray-50">
