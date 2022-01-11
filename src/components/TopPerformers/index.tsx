@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { GameStatsType, PlayerType } from "../../types"
+import { GameStatsType } from "../../types"
 
 type TopPerformersType = {
  gameStats: GameStatsType[],

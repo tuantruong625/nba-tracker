@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const News = () => {
  const [news, setNews] = useState<any[]>([])
@@ -8,7 +8,6 @@ const News = () => {
   (async () => {
    const { data } = await axios.get('https://newsdata.io/api/1/news?apikey=pub_3365dd8401625cf5a2948987de7e619e5f1d&q=nba&country=us&language=en&category=sports')
    setNews(data.results)
-
   })()
  }, [])
  return (

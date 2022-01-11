@@ -9,22 +9,20 @@ import { displayLogo } from '../../utils'
 const GameStats = ({ todaysGames }: { todaysGames: GameType[] }) => {
  let params: any = useParams()
  const [gameStats, setGameStats] = useState<GameStatsType[]>([])
- const [selectedGame, setSelectedGame] = useState(params.gameId)
+ const [selectedGame] = useState(params.gameId)
  const [game, setGame] = useState<GameType>()
 
- const getGameStats = async () => {
-  try {
-   const { data } = await axios.get(`https://www.balldontlie.io/api/v1/stats?game_ids[]=${selectedGame}&per_page=100`, {
-    headers: { "Access-Control-Allow-Origin": "*" }
-   })
-   setGameStats(data.data)
-  } catch (e) {
-   console.error(e)
-  }
- }
-
  useEffect(() => {
-  getGameStats()
+  (async () => {
+   try {
+    const { data } = await axios.get(`https://www.balldontlie.io/api/v1/stats?game_ids[]=${selectedGame}&per_page=100`, {
+     headers: { "Access-Control-Allow-Origin": "*" }
+    })
+    setGameStats(data.data)
+   } catch (e) {
+    console.error(e)
+   }
+  })()
   setGame(todaysGames.find(game => game.id === parseInt(selectedGame)))
  }, [todaysGames, game, selectedGame])
 
