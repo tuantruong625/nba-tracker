@@ -17,7 +17,6 @@ function App() {
     (async () => {
       const { data } = await axios.get(`https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=${todaysDate.toFormat('yyyy-MM-d')}&end_date=${todaysDate.toFormat('yyyy-MM-d')}`)
       setTodaysGames(data.data)
-
     })()
   }, [todaysDate])
 
@@ -38,7 +37,7 @@ function App() {
               <p className="text-gray-600">{todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
               <div>
                 <div className="flex">
-                  <button onClick={() => { setTodaysDate(todaysDate) }}>
+                  <button onClick={() => { setTodaysDate(DateTime.now()) }}>
                     <h1 className="text-3xl font-bold mr-4">Today's Games</h1>
                   </button>
                   <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: -1 })) }}>←</button>
