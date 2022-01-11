@@ -45,24 +45,31 @@ const GameStats = ({ todaysGames }: { todaysGames: GameType[] }) => {
       <p className="text-sm pt-1 text-gray-700">{game?.visitor_team.name}</p>
      </div>
     </div>
-    <p className="pt-3 text-lg text-gray-800">
-     Top Performers
-    </p>
+    {
+     gameStats.length ? <>
+      <p className="pt-3 text-lg text-gray-800">
+       Top Performers
+      </p>
 
-    <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
-     <TopPerformers gameStats={gameStats} teamName={game?.home_team.name} />
-     <TopPerformers gameStats={gameStats} teamName={game?.visitor_team.name} />
-    </div>
+      <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
+       <TopPerformers gameStats={gameStats} teamName={game?.home_team.name} />
+       <TopPerformers gameStats={gameStats} teamName={game?.visitor_team.name} />
+      </div>
 
-    <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
-     <div className='overflow-auto col-span-3 border rounded'>
-      <StatsTable teamName={game?.home_team.name} gameStats={gameStats} />
-     </div>
+      <div className="col-span-full grid grid-cols-6 gap-4 pt-3">
+       <div className='overflow-auto col-span-3 border rounded'>
+        <StatsTable teamName={game?.home_team.name} gameStats={gameStats} />
+       </div>
 
-     <div className='overflow-auto col-span-3 border rounded'>
-      <StatsTable teamName={game?.visitor_team.name} gameStats={gameStats} />
-     </div>
-    </div>
+       <div className='overflow-auto col-span-3 border rounded'>
+        <StatsTable teamName={game?.visitor_team.name} gameStats={gameStats} />
+       </div>
+      </div>
+     </> :
+      <div className='flex justify-center items-center pt-12'>
+       <h2 className='text-2xl text-gray-700'>🙅 Game has not started yet 🙅</h2>
+      </div>
+    }
    </div>
   </>
  )
