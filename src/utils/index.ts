@@ -1,6 +1,6 @@
 import { teamLogos } from '../data';
 
-export const displayLogo = (teamName = 'Raptors'): string | undefined => {
+export const displayLogo = (teamName = 'Hawks'): string | undefined => {
  const logo = teamLogos.find(teamLogo => {
    return teamLogo.name === teamName
  })

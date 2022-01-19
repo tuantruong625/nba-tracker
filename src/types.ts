@@ -23,7 +23,7 @@ export type TeamDetailsType = {
 }
 
 export type PlayerType = {
- id: 3547207;
+ id: number;
  first_name: string;
  height_feet: number;
  height_inches: number;

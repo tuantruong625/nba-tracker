@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export const teamLogos = [
  { name: 'Hawks', src: 'http://loodibee.com/wp-content/uploads/nba-atlanta-hawks-logo-300x300.png' },
  { name: 'Celtics', src: 'http://loodibee.com/wp-content/uploads/nba-boston-celtics-logo-300x300.png' },
