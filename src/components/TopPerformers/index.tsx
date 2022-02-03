@@ -17,9 +17,10 @@ const TopPerformers = ({ gameStats, teamName }: TopPerformersType) => {
 
  return (
   <div className="col-span-3 bg-gray-50">
-   <div className="col-span-3 bg-gray-50 p-4 flex items-center border rounded-sm">
+   <div className="col-span-3 bg-gray-50 p-4 flex flex-col md:flex-row items-center border rounded-sm">
     <p className="text-lg text-gray-700">{topPlayer?.player.first_name} {topPlayer?.player.last_name}</p>
-    <span className="px-4 text-xl text-gray-400">|</span>
+    <div className="flex">
+    <span className="px-4 text-xl text-gray-400 hidden md:block">|</span>
     <p className="px-2">
      <span className="text-gray-700 text-lg">{topPlayer?.pts}</span>
      <span className="text-gray-600 text-xs">PTS</span>
@@ -36,6 +37,7 @@ const TopPerformers = ({ gameStats, teamName }: TopPerformersType) => {
      <span className="text-gray-700 text-lg">{topPlayer?.blk}</span>
      <span className="text-gray-600 text-xs">BLK</span>
     </p>
+    </div>
    </div>
   </div>
  )
