@@ -1,4 +1,4 @@
-import { GameStatsType } from "../types"
+import { GameStatsType, GameType } from "../types"
 
 export const MOCK_TEAM_NAME = 'Raptors'
 export const MOCK_GAME_STATS: GameStatsType[] = [
@@ -282,4 +282,65 @@ export const MOCK_GAME_STATS: GameStatsType[] = [
   },
   turnover: 5,
  },
+]
+
+export const MOCK_TODAYS_GAME: GameType[] = [
+  {
+    id: 474119,
+    date: "2022-01-24T00:00:00.000Z",
+    home_team_score: 0,
+    period: 0,
+    postseason: false,
+    season: 2021,
+    status: "8:00 PM ET",
+    time: "",
+    visitor_team_score: 0,
+    home_team: {
+      id: 19,
+      abbreviation: "NOP",
+      city: "New Orleans",
+      conference: "West",
+      division: "Southwest",
+      full_name: "New Orleans Pelicans",
+      name: "Pelicans"
+    },
+    visitor_team: {
+      id: 12,
+      abbreviation: "IND",
+      city: "Indiana",
+      conference: "East",
+      division: "Central",
+      full_name: "Indiana Pacers",
+      name: "Pacers"
+    },
+  },
+  {
+    id: 474121,
+    date: "2022-01-24T00:00:00.000Z",
+    home_team_score: 0,
+    period: 0,
+    postseason: false,
+    season: 2021,
+    status: "7:30 PM ET",
+    time: "",
+    home_team: {
+      id: 1,
+      abbreviation: "ATL",
+      city: "Atlanta",
+      conference: "East",
+      division: "Southeast",
+      full_name: "Atlanta Hawks",
+      name: "Hawks"
+    },
+    visitor_team_score: 0,
+    visitor_team: {
+      id: 5,
+      abbreviation: "CHI",
+      city: "Chicago",
+      conference: "East",
+      division: "Central",
+      full_name: "Chicago Bulls",
+      name: "Bulls"
+    },
+  }
 ]

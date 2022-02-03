@@ -24,15 +24,12 @@ function App() {
   return (
     <div className="mx-auto container">
       <div className="grid grid-cols-12 h-screen gap-6 pb-6 m-5">
-        <nav className="row-span-full col-span-2 bg-gray-100 md:flex flex-col items-center justify-center hidden">
-          <Link to="/" className="flex justify-around items-center rounded-sm p-2 my-2">Home</Link>
-          <Link to="/news" className="flex justify-around items-center rounded-sm p-2 my-2">News</Link>
-        </nav>
-        <div className="col-span-12 md:col-span-10 pb-10">
+        <div className="col-span-12 pb-10">
           <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-full py-5 ">
-              <input type="text" placeholder="Search..." className="px-2 py-2 border rounded-md hidden md:block" />
-            </div>
+            <nav className="col-span-full bg-gray-100 flex items-center justify-center">
+              <Link to="/" className="flex justify-around items-center rounded-sm p-2 my-2">Home</Link>
+              <Link to="/news" className="flex justify-around items-center rounded-sm p-2 my-2">News</Link>
+            </nav>
 
             <div className="col-span-full relative">
               <p className="text-gray-600">{todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
