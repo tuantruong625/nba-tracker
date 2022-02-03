@@ -6,6 +6,7 @@ import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import GameStats from './pages/gameStats';
 import { GameType } from './types';
 import News from './pages/news';
+import logo from './logo.svg'
 
 function App() {
   const [todaysGames, setTodaysGames] = useState<GameType[]>([])
@@ -23,15 +24,21 @@ function App() {
 
   return (
     <div className="mx-auto container">
-      <div className="grid grid-cols-12 h-screen gap-6 pb-6 m-5">
-        <div className="col-span-12 pb-10">
+      <div className="grid grid-cols-12 h-screen gap-6">
+        <div className="col-span-12 p-10 pt-0">
           <div className="grid grid-cols-12 gap-6">
-            <nav className="col-span-full bg-gray-100 flex items-center justify-center">
-              <Link to="/" className="flex justify-around items-center rounded-sm p-2 my-2">Home</Link>
-              <Link to="/news" className="flex justify-around items-center rounded-sm p-2 my-2">News</Link>
+            <nav className="col-span-full flex justify-between items-center py-6 border border-gray-100 border-t-0 border-r-0 border-l-0 sticky top-0 bg-white">
+              <div className="flex items-center">
+                <img src={logo} alt="Logo" className="w-5" />
+                <p className='pl-2 text-xl text-gray-800'>Nba Tracker</p>
+              </div>
+              <div>
+                <Link to="/" className="px-2">Home</Link>
+                <Link to="/news" className="px-2">News</Link>
+              </div>
             </nav>
 
-            <div className="col-span-full relative">
+            <div className="col-span-full">
               <p className="text-gray-600">{todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
               <div>
                 <div className="flex">
