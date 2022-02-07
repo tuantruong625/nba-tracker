@@ -5,26 +5,38 @@ import StatsTable from '../../components/StatsTable/index'
 import TopPerformers from '../../components/TopPerformers'
 import { GameStatsType, GameType } from '../../types'
 import { displayLogo } from '../../utils'
+import basketball from './basketball-graphic.png'
 
 const GameStats = ({ todaysGames }: { todaysGames: GameType[] }) => {
   let params: any = useParams()
   const [gameStats, setGameStats] = useState<GameStatsType[]>([])
   const [selectedGame] = useState(params.gameId)
   const [game, setGame] = useState<GameType>()
+  const [loading, setLoading] =  useState(false)
 
   useEffect(() => {
     (async () => {
       try {
+        setLoading(true)
         const { data } = await axios.get(`https://www.balldontlie.io/api/v1/stats?game_ids[]=${selectedGame}&per_page=100`, {
           headers: { "Access-Control-Allow-Origin": "*" }
         })
         setGameStats(data.data)
+        setTimeout(() => {
+          setLoading(false)
+        }, 1000);
       } catch (e) {
         console.error(e)
       }
     })()
     setGame(todaysGames.find(game => game.id === parseInt(selectedGame)))
   }, [todaysGames, game, selectedGame])
+
+  if (loading) {
+    return <div className='col-span-full flex justify-center items-center h-max'>
+      <img src={basketball} alt="" className='animate-bounce h-20 mt-14' />
+    </div>
+  }
 
   return (
     <>
