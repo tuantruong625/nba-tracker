@@ -26,7 +26,7 @@ const GameStats = ({ todaysGames }: { todaysGames: GameType[] }) => {
 
         setTimeout(() => {
           setLoading(false)
-        }, 10000);
+        }, 2000);
       } catch (e) {
         console.error(e)
       }
