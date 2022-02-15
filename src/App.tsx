@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 import { DateTime } from 'luxon'
 import Dashboard from './pages/dashboard';
-import { Link, Route, Routes, useLocation, Router } from 'react-router-dom';
+import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import GameStats from './pages/gameStats';
 import { GameType } from './types';
 import News from './pages/news';
