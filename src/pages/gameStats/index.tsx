@@ -40,7 +40,6 @@ const GameStats = ({ todaysGames }: { todaysGames: GameType[] }) => {
 
   return (
     <>
-      <Link to="/">Back</Link>
       <div className="col-span-full">
         <div className="flex justify-around items-center bg-gray-50 border rounded-sm p-4">
           <div className="flex flex-col items-center flex-1">
