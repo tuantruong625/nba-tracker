@@ -9,16 +9,15 @@ interface GamesState {
 }
 
 const initialState: GamesState = {
- value: MOCK_TODAYS_GAME
+ value: []
 }
 
 export const gamesSlice = createSlice({
  name: 'games',
  initialState,
  reducers: {
-  nextGame: (state, action) => {
-   console.log(state.value)
-   console.log(action)
+  nextGame: (state) => {
+   console.log(state);
   }
  }
 })
