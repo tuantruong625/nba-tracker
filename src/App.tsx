@@ -15,7 +15,7 @@ function App() {
   const [todaysDate, setTodaysDate] = useState(DateTime.now())
   const location = useLocation()
   const [dayCount, setDayCount] = useState(0)
-  const { data, error, isLoading } = useGetTodaysGamesQuery(dayCount)
+  const { data } = useGetTodaysGamesQuery(dayCount)
 
   const handleGameNavigation = (increment = false) => {
     if (!increment) {
