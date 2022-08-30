@@ -3,6 +3,7 @@ import { displayLogo } from "../../utils"
 import { Link } from 'react-router-dom';
 import { GameType } from "../../types";
 import { Dispatch, SetStateAction } from "react";
+import Loader from "../../components/Loader";
 
 type GameProps = {
  todaysGames: GameType[];
@@ -10,6 +11,23 @@ type GameProps = {
 }
 
 const Games = ({ todaysGames, onSetSelectedGame }: GameProps): JSX.Element => {
+
+ if (todaysGames?.length === 0 || !todaysGames) {
+  return (
+   <div className="col-span-12 md:col-span-6">
+    <div className='col-span-full' style={{ height: '50vh' }}>
+     <div className='flex-1 h-full flex justify-center items-center'>
+      <h2 className="text-2xl">No Games until October 🙁</h2>
+     </div>
+    </div>
+   </div>
+  )
+ }
+
+ if (!todaysGames) {
+  return <Loader />
+ }
+
  return <>
   {
    todaysGames.map(game => (

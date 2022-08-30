@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios'
 import { DateTime } from 'luxon'
 import Dashboard from './pages/dashboard';
 import { Link, Route, Routes, useLocation } from 'react-router-dom';
@@ -7,20 +6,32 @@ import GameStats from './pages/gameStats';
 import { GameType } from './types';
 import News from './pages/news';
 import logo from './logo.svg'
+import { useGetTodaysGamesQuery } from './services/games';
 
 function App() {
-  const [todaysGames, setTodaysGames] = useState<GameType[]>([])
-  const [todaysDate, setTodaysDate] = useState(DateTime.now())
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedGame, setSelectedGame] = useState('')
+  const [todaysGames, setTodaysGames] = useState<GameType[]>([])
+  const [todaysDate, setTodaysDate] = useState(DateTime.now())
   const location = useLocation()
+  const [dayCount, setDayCount] = useState(0)
+  const { data } = useGetTodaysGamesQuery(dayCount)
+
+  const handleGameNavigation = (increment = false) => {
+    if (!increment) {
+      setDayCount(dayCount - 1)
+      setTodaysDate(todaysDate.plus({ days: - 1 }))
+
+      return
+    }
+
+    setDayCount(dayCount + 1)
+    setTodaysDate(todaysDate.plus({ days: 1 }))
+  }
 
   useEffect(() => {
-    (async () => {
-      const { data } = await axios.get(`https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=${todaysDate.toFormat('yyyy-MM-d')}&end_date=${todaysDate.toFormat('yyyy-MM-d')}`)
-      setTodaysGames(data.data)
-    })()
-  }, [todaysDate])
+    setTodaysGames(data?.data)
+  }, [data])
 
   return (
     <div className="mx-auto container">
@@ -39,7 +50,7 @@ function App() {
             </nav>
 
             <div className="col-span-full">
-              <p className="text-gray-600">{todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
+              <p className="text-gray-600">{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
               <div>
                 <div className="flex items-center">
                   <>
@@ -48,8 +59,8 @@ function App() {
                     </button>
                     {
                       location.pathname.includes('/game-stats') ? <button className='bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg'><Link to="/">←</Link></button> : <>
-                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: -1 })) }}>←</button>
-                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => { setTodaysDate(todaysDate.plus({ days: 1 })) }}>→</button>
+                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => handleGameNavigation()}>←</button>
+                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => handleGameNavigation(true)}>→</button>
                       </>
                     }
                   </>
