@@ -10,6 +10,7 @@ export type GameType = {
  time: string;
  visitor_team: TeamDetailsType;
  visitor_team_score: number;
+ data: any
 }
 
 export type TeamDetailsType = {
@@ -51,7 +52,7 @@ export type GameStatsType = {
  min: string;
  oreb: string;
  pf: string;
- player: PlayerType; 
+ player: PlayerType;
  pts: number;
  reb: number;
  stl: number;

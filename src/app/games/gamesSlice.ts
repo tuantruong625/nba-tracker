@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
 import { GameType } from "../../types";
-import { MOCK_TODAYS_GAME } from "../../tests/testMocks";
+// import { MOCK_TODAYS_GAME } from "../../tests/testMocks";
 
 interface GamesState {
  value: GameType[]

@@ -20,6 +20,6 @@ export const nbaApi = createApi({
  }),
 })
 
-// `https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=${todaysDate.toFormat('yyyy-MM-d')}&end_date=${todaysDate.toFormat('yyyy-MM-d')}`
+// `https://www.balldontlie.io/api/v1/games?seasons[]=2021&start_date=2022-04-16&end_date=2022-04-16`
 
 export const { useGetAllNbaGamesQuery, useGetTodaysGamesQuery } = nbaApi

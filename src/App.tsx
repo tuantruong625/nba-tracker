@@ -6,20 +6,15 @@ import GameStats from './pages/gameStats';
 import { GameType } from './types';
 import News from './pages/news';
 import logo from './logo.svg'
-import { useDispatch } from 'react-redux';
-import { nextGame } from './app/games/gamesSlice';
-import { useAppSelector } from './app/hooks';
-import { useGetAllNbaGamesQuery, useGetTodaysGamesQuery } from './services/games';
+import { useGetTodaysGamesQuery } from './services/games';
 
 function App() {
-  // const [todaysGames, setTodaysGames] = useState<GameType[]>([])
-  const [todaysDate, setTodaysDate] = useState(DateTime.now())
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedGame, setSelectedGame] = useState('')
+  const [todaysGames, setTodaysGames] = useState<GameType[]>([])
+  const [todaysDate, setTodaysDate] = useState(DateTime.now())
   const location = useLocation()
   const [dayCount, setDayCount] = useState(0)
-  const todaysGames = useAppSelector((state) => state.games.value)
-
   const { data, error, isLoading } = useGetTodaysGamesQuery(dayCount)
 
   const handleGameNavigation = (increment = false) => {
@@ -33,6 +28,10 @@ function App() {
     setDayCount(dayCount + 1)
     setTodaysDate(todaysDate.plus({ days: 1 }))
   }
+
+  useEffect(() => {
+    setTodaysGames(data?.data)
+  }, [data])
 
   return (
     <div className="mx-auto container">

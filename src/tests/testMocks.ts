@@ -44,6 +44,7 @@ export const MOCK_GAME_STATS: GameStatsType[] = [
         name: 'doobar',
       },
       visitor_team_score: 69,
+      data: ''
     },
     min: '25',
     oreb: '23',
@@ -114,6 +115,7 @@ export const MOCK_GAME_STATS: GameStatsType[] = [
         name: 'doobar',
       },
       visitor_team_score: 69,
+      data: ''
     },
     min: '25',
     oreb: '23',
@@ -184,6 +186,7 @@ export const MOCK_GAME_STATS: GameStatsType[] = [
         name: 'doobar',
       },
       visitor_team_score: 69,
+      data: ''
     },
     min: '25',
     oreb: '23',
@@ -254,6 +257,7 @@ export const MOCK_GAME_STATS: GameStatsType[] = [
         name: 'doobar',
       },
       visitor_team_score: 69,
+      data: ''
     },
     min: '25',
     oreb: '23',
@@ -318,5 +322,6 @@ export const MOCK_TODAYS_GAME: GameType[] = [
       full_name: "Indiana Pacers",
       name: "Pacers"
     },
+    data: '',
   },
 ]
