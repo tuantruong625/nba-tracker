@@ -7,6 +7,10 @@ import { GameType } from './types';
 import News from './pages/news';
 import logo from './logo.svg'
 import { useGetTodaysGamesQuery } from './services/games';
+import { Container } from './utils/styles';
+import Grid from './components/Grid/Grid';
+import { Spacing } from '@tuantruong625/quotidian-component-library';
+
 
 function App() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -34,8 +38,8 @@ function App() {
   }, [data])
 
   return (
-    <div className="mx-auto container">
-      <div className="grid grid-cols-12 h-screen gap-6">
+    <Container>
+      <Grid cols={12} gap={Spacing.size5} style={{ height: '100vh' }} >
         <div className="col-span-12 p-5 md:p-10 pt-0">
           <div className="grid grid-cols-12 gap-6">
             <nav className="col-span-full flex justify-between items-center py-6 border border-gray-100 border-t-0 border-r-0 border-l-0 sticky top-0 bg-white">
@@ -74,8 +78,8 @@ function App() {
             </Routes>
           </div>
         </div>
-      </div>
-    </div>
+      </Grid>
+    </Container>
   );
 }
 
