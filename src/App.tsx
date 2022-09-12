@@ -9,7 +9,29 @@ import logo from './logo.svg'
 import { useGetTodaysGamesQuery } from './services/games';
 import { Container } from './utils/styles';
 import Grid from './components/Grid/Grid';
-import { Spacing } from '@tuantruong625/quotidian-component-library';
+import { Spacing, Screens, Colors, Body, Button } from '@tuantruong625/quotidian-component-library';
+import styled from 'styled-components';
+import NavBar from './components/NavBar';
+import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
+
+const ContentColumn = styled.div`
+  grid-column: 1 / -1;
+  padding: ${Spacing.size5};
+  padding-top: 0;
+  
+  @media (min-width: ${Screens.md}) {
+    padding: ${Spacing.size7};
+  }
+`
+
+const FullColumnSpan = styled.div`
+  grid-column: 1 / -1;
+`
+
+const FlexContainer = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 
 function App() {
@@ -40,46 +62,39 @@ function App() {
   return (
     <Container>
       <Grid cols={12} gap={Spacing.size5} style={{ height: '100vh' }} >
-        <div className="col-span-12 p-5 md:p-10 pt-0">
-          <div className="grid grid-cols-12 gap-6">
-            <nav className="col-span-full flex justify-between items-center py-6 border border-gray-100 border-t-0 border-r-0 border-l-0 sticky top-0 bg-white">
-              <div className="flex items-center">
-                <img src={logo} alt="Logo" className="w-5" />
-                <p className='pl-2 text-xl text-gray-800'>Nba Tracker</p>
-              </div>
+        <ContentColumn>
+          <Grid cols={12} gap={Spacing.size5}>
+            <NavBar />
+            <FullColumnSpan>
+              <Body style={{ color: Colors.gray6 }}>{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </Body>
               <div>
-                <Link to="/" className="px-2">Home</Link>
-                <Link to="/news" className="px-2">News</Link>
-              </div>
-            </nav>
-
-            <div className="col-span-full">
-              <p className="text-gray-600">{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
-              <div>
-                <div className="flex items-center">
+                <FlexContainer>
                   <>
-                    <button onClick={() => { setTodaysDate(DateTime.now()) }}>
-                      <h1 className="text-3xl font-bold mr-4">Today's Games</h1>
-                    </button>
+
+                    <Button onClick={() => { setTodaysDate(DateTime.now()) }} label="Today's Game" variant='text' size='lg' style={{ paddingLeft: 0, paddingRight: 0 }} />
                     {
-                      location.pathname.includes('/game-stats') ? <button className='bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg'><Link to="/">←</Link></button> : <>
-                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => handleGameNavigation()}>←</button>
-                        <button className="bg-gray-50 p-1 w-10 h-10 rounded-full text-gray-500 hover:bg-blue-500 hover:text-gray-50 hover:shadow-lg" onClick={() => handleGameNavigation(true)}>→</button>
-                      </>
+                      location.pathname.includes('/game-stats') ?
+                        <Link to='/'>
+                          <Button icon={<ArrowLeftIcon />} shape='full' style={{ margin: Spacing.size1 }} />
+                        </Link> :
+                        <>
+                          <Button icon={<ArrowLeftIcon />} shape='full' style={{ margin: Spacing.size1 }} onClick={() => handleGameNavigation()} />
+                          <Button icon={<ArrowRightIcon />} shape='full' onClick={() => handleGameNavigation(true)} />
+                        </>
                     }
                   </>
-                </div>
+                </FlexContainer>
               </div>
-            </div>
+            </FullColumnSpan>
             <Routes>
               <Route path="/" element={<Dashboard todaysGames={todaysGames} onSetSelectedGame={setSelectedGame} />} />
               <Route path={`/game-stats/:gameId`} element={<GameStats todaysGames={todaysGames} />} />
               <Route path="/news" element={<News />} />
             </Routes>
-          </div>
-        </div>
-      </Grid>
-    </Container>
+          </Grid>
+        </ContentColumn>
+      </Grid >
+    </Container >
   );
 }
 
