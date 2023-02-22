@@ -1,6 +1,7 @@
-import { Spacing, Colors, Body } from "@tuantruong625/quotidian-component-library"
+import { Spacing, Colors } from "@tuantruong625/quotidian-component-library"
 import { Link } from "react-router-dom"
 import styled from "styled-components"
+import logo from '../../assets/logo.png'
 
 const Nav = styled.nav`
   grid-column: 1 / -1;
@@ -21,22 +22,15 @@ const NavLogContainer = styled.div`
   display: flex;
   align-items: center;
 `
-
-const NavHeader = styled(Body)`
-  padding-left: ${Spacing.size2};
-  color: ${Colors.gray7};
-`
-
 const NavImage = styled.img`
-  width: ${Spacing.size7};
+  width: 15rem;
 `
 
 const NavBar = (): JSX.Element => {
   return (
     <Nav>
       <NavLogContainer>
-        {/* <NavImage src={logo} alt="Logo" /> */}
-        <NavHeader isCapitalized>nba tracker</NavHeader>
+        <NavImage src={logo} alt="Logo" />
       </NavLogContainer>
       <div>
         <Link to="/" style={{ paddingLeft: Spacing.size3, paddingRight: Spacing.size3 }}> Home</Link>

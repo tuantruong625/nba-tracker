@@ -5,7 +5,6 @@ import { Link, Route, Routes, useLocation } from 'react-router-dom';
 import GameStats from './pages/gameStats';
 import { GameType } from './types';
 import News from './pages/news';
-import logo from './logo.svg'
 import { useGetTodaysGamesQuery } from './services/games';
 import { Container } from './utils/styles';
 import Grid from './components/Grid/Grid';
@@ -30,6 +29,7 @@ const FullColumnSpan = styled.div`
 
 const FlexContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `
 
@@ -66,15 +66,14 @@ function App() {
           <Grid cols={12} gap={Spacing.size5}>
             <NavBar />
             <FullColumnSpan>
-              <Body style={{ color: Colors.gray6 }}>{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </Body>
-              <div>
                 <FlexContainer>
-                  <>
+                <Body style={{ color: Colors.gray6 }}>{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </Body>
+                <div style={{display: 'flex', alignItems: 'center'}}>
 
-                    <Button onClick={() => { setTodaysDate(DateTime.now()) }} label="Today's Game" variant='text' size='lg' style={{ paddingLeft: 0, paddingRight: 0 }} />
+                  <>
                     {
                       location.pathname.includes('/game-stats') ?
-                        <Link to='/'>
+                      <Link to='/'>
                           <Button icon={<ArrowLeftIcon />} shape='full' style={{ margin: Spacing.size1 }} />
                         </Link> :
                         <>
@@ -83,8 +82,8 @@ function App() {
                         </>
                     }
                   </>
+                    </div>
                 </FlexContainer>
-              </div>
             </FullColumnSpan>
             <Routes>
               <Route path="/" element={<Dashboard todaysGames={todaysGames} onSetSelectedGame={setSelectedGame} />} />
