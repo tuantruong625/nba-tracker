@@ -1,6 +1,5 @@
-import { repeat } from "lodash";
 import { HTMLAttributes } from "react"
-import styled, { createGlobalStyle } from "styled-components"
+import styled from "styled-components"
 
 interface GridProps extends HTMLAttributes<HTMLDivElement> {
  cols?: number

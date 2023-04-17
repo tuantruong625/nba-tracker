@@ -10,7 +10,6 @@ import { Container } from './utils/styles';
 import Grid from './components/Grid/Grid';
 import styled from 'styled-components';
 import NavBar from './components/NavBar';
-import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 
 const ContentColumn = styled.div`
   grid-column: 1 / -1;
