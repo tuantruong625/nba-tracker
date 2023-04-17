@@ -8,18 +8,17 @@ import News from './pages/news';
 import { useGetTodaysGamesQuery } from './services/games';
 import { Container } from './utils/styles';
 import Grid from './components/Grid/Grid';
-import { Spacing, Screens, Colors, Body, Button } from '@tuantruong625/quotidian-component-library';
 import styled from 'styled-components';
 import NavBar from './components/NavBar';
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/solid'
 
 const ContentColumn = styled.div`
   grid-column: 1 / -1;
-  padding: ${Spacing.size5};
+  padding: 1.5rem;
   padding-top: 0;
   
-  @media (min-width: ${Screens.md}) {
-    padding: ${Spacing.size7};
+  @media (min-width: 768px) {
+    padding: 2.5rem;
   }
 `
 
@@ -61,24 +60,24 @@ function App() {
 
   return (
     <Container>
-      <Grid cols={12} gap={Spacing.size5} style={{ height: '100vh' }} >
+      <Grid cols={12} gap="1.5rem" style={{ height: '100vh' }} >
         <ContentColumn>
-          <Grid cols={12} gap={Spacing.size5}>
+          <Grid cols={12} gap="1.5rem">
             <NavBar />
             <FullColumnSpan>
                 <FlexContainer>
-                <Body style={{ color: Colors.gray6 }}>{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </Body>
+                <p style={{ color: "#3B4252" }}>{data?.date ? data?.date : todaysDate.toFormat('EEEE, MMM dd, yyyy')} </p>
                 <div style={{display: 'flex', alignItems: 'center'}}>
 
                   <>
                     {
                       location.pathname.includes('/game-stats') ?
                       <Link to='/'>
-                          <Button icon={<ArrowLeftIcon />} shape='full' style={{ margin: Spacing.size1 }} />
+                          <button>home</button>
                         </Link> :
                         <>
-                          <Button icon={<ArrowLeftIcon />} shape='full' style={{ margin: Spacing.size1 }} onClick={() => handleGameNavigation()} />
-                          <Button icon={<ArrowRightIcon />} shape='full' onClick={() => handleGameNavigation(true)} />
+                          <button  onClick={() => handleGameNavigation()} >left</button>
+                          <button  onClick={() => handleGameNavigation(true)} >right</button>
                         </>
                     }
                   </>

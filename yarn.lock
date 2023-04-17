@@ -1811,11 +1811,6 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
-"@tuantruong625/quotidian-component-library@0.0.35":
-  version "0.0.35"
-  resolved "https://npm.pkg.github.com/download/@tuantruong625/quotidian-component-library/0.0.35/53862b1eef142bf11b306ed25c10e6f5e186d163#53862b1eef142bf11b306ed25c10e6f5e186d163"
-  integrity sha512-YAWJpQX2cTTlw/Fo/mL/3eI5wdrROEdIDcKzk7h7ao4f8mLOmaX6gYNqnfgAm7sUyufns507mbF/l2XujwkXdQ==
-
 "@types/anymatch@*":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@types/anymatch/-/anymatch-1.3.1.tgz#336badc1beecb9dacc38bea2cf32adf627a8421a"

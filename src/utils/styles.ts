@@ -1,4 +1,3 @@
-import { Screens } from '@tuantruong625/quotidian-component-library';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -6,6 +5,6 @@ export const Container = styled.div`
   width: 100%;
 
   @media (min-width: 640px) {
-    max-width: ${Screens.xl};
+    max-width: 1280px;
   }
 `
