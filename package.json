@@ -28,6 +28,7 @@
   },
   "scripts": {
     "start": "craco start",
+    "build:craco": "npm install --registry=https://npm.pkg.github.com/ --scope=@<tuantruong625> --authToken=${QUOTIDIAN_KEY} && craco build",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
