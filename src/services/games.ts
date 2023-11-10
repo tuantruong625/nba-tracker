@@ -14,7 +14,7 @@ export const nbaApi = createApi({
     getTodaysGames: builder.query<GameType, number>({
       query: (day) => {
         const selectedDate = todaysDate.plus({ days: day })
-        return `games?seasons[]=2022&start_date=${selectedDate.toFormat('yyyy-MM-d')}&end_date=${selectedDate.toFormat('yyyy-MM-d')}`
+        return `games?seasons[]=2023&start_date=${selectedDate.toFormat('yyyy-MM-d')}&end_date=${selectedDate.toFormat('yyyy-MM-d')}`
         // const selectedDate = `2022-04-16`
         // return `games?seasons[]=2021&start_date=${selectedDate}&end_date=${selectedDate}`
       },
