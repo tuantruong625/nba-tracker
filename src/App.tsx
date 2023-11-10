@@ -74,10 +74,10 @@ function App() {
                       <Link to='/'>
                           <button>home</button>
                         </Link> :
-                        <>
-                          <button  onClick={() => handleGameNavigation()} >left</button>
-                          <button  onClick={() => handleGameNavigation(true)} >right</button>
-                        </>
+                        <div className='flex gap-3'>
+                          <button className='py-1 px-3  border border-gray-500 rounded-full flex items-center text-gray-500'  onClick={() => handleGameNavigation()}>◁</button>
+                          <button className='py-1 px-3  border border-gray-500 rounded-full flex items-center text-gray-500'  onClick={() => handleGameNavigation(true)} >▷</button>
+                        </div>
                     }
                   </>
                     </div>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { GameType } from "../../types";
 import { Dispatch, SetStateAction } from "react";
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
+import moment from "moment";
 
 type GameProps = {
  todaysGames: GameType[];
@@ -35,7 +36,8 @@ const Games = ({ todaysGames, onSetSelectedGame }: GameProps): JSX.Element => {
       </div>
       <div className="flex items-center justify-center flex-1">
        <p className={`text-2xl ${game.home_team_score > game.visitor_team_score ? 'text-green-500' : 'text-gray-800'}`}>{game.home_team_score === 0 ? '' : game.home_team_score}</p>
-       <p className="text-gray-700 px-2 md:px-6 text-sm md:text-base">{game.status}</p>
+       <p className="text-gray-700 px-2 md:px-6 text-sm md:text-base">{game.period === 0 ? moment(game.status).format('h:mm a') : game.status}</p>
+ 
        <p className={`text-2xl ${game.visitor_team_score > game.home_team_score ? 'text-green-500' : 'text-gray-800'}`}>{game.visitor_team_score === 0 ? '' : game.visitor_team_score}</p>
       </div>
       <div className="flex flex-col items-center flex-1">

@@ -6,12 +6,16 @@ type StatsBodyType = {
 }
 
 const StatsBody = ({ gameStats, teamName }: StatsBodyType) => {
+  const transformStatToPercentage = (stat: number) => {
+    return (stat * 100).toFixed(0).toString() + '%'
+  }
+
  return (
   <tbody>
    {
-    gameStats && gameStats.filter((stat: { team: { name: any } }) => stat.team.name === teamName).map((stat: GameStatsType) => {
+       gameStats && gameStats.filter((stat: { team: { name: any } }) => stat.team.name === teamName).map((stat: GameStatsType) => {
      return (
-      <tr key={stat.id} className="text-sm text-gray-700 font-light">
+       <tr key={stat.id} className="text-sm text-gray-700 font-light">
        <td className='p-2'>{stat?.player.first_name[0]}.{stat.player.last_name}</td>
        <td className='p-2'>{stat?.min}</td>
        <td className='p-2'>{stat?.pts}</td>
@@ -26,9 +30,9 @@ const StatsBody = ({ gameStats, teamName }: StatsBodyType) => {
        <td className='p-2'>{stat?.pf}</td>
        <td className='p-2'>{stat?.oreb}</td>
        <td className='p-2'>{stat?.dreb}</td>
-       <td className='p-2'>{stat?.fg_pct}</td>
-       <td className='p-2'>{stat?.ft_pct}</td>
-       <td className='p-2'>{stat?.fg3_pct}</td>
+       <td className='p-2'>{transformStatToPercentage(stat?.fg_pct)}</td>
+       <td className='p-2'>{transformStatToPercentage(stat?.ft_pct)}</td>
+       <td className='p-2'>{transformStatToPercentage(stat?.fg3_pct)}</td>
       </tr>
      )
     })
