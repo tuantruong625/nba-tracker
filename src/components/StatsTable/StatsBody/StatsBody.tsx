@@ -1,3 +1,5 @@
+import { useState } from "react"
+import PlayerStats from "../../../pages/playerStats"
 import { GameStatsType } from "../../../types"
 
 type StatsBodyType = {
@@ -6,17 +8,31 @@ type StatsBodyType = {
 }
 
 const StatsBody = ({ gameStats, teamName }: StatsBodyType) => {
+  const [showPlayerStats, setShowPlayerStats] = useState(false)
+  const [selectedPlayer, setSelectedPlayer] = useState<number | undefined>()
   const transformStatToPercentage = (stat: number) => {
     return (stat * 100).toFixed(0).toString() + '%'
   }
 
+  const handlePlayerStats = (playerId: number) => {
+    setSelectedPlayer(playerId)
+    setShowPlayerStats(true)
+  }
+
+  const getPlayerStats = (playerId: number | undefined) => {
+    return gameStats.find((stat: GameStatsType) => stat.player.id === playerId)
+  }
+
  return (
-  <tbody>
+   <tbody>
+     {
+       showPlayerStats ? <PlayerStats showPlayerStats={showPlayerStats} setShowPlayerStats={setShowPlayerStats} selectedPlayer={getPlayerStats(selectedPlayer)} /> : null
+     }
    {
        gameStats && gameStats.filter((stat: { team: { name: any } }) => stat.team.name === teamName).map((stat: GameStatsType) => {
      return (
        <tr key={stat.id} className="text-sm text-gray-700 font-light">
-       <td className='p-2'>{stat?.player.first_name[0]}.{stat.player.last_name}</td>
+       <td className='p-2 cursor-pointer hover:underline' onClick={() => handlePlayerStats(stat.player.id)}>{stat?.player?.first_name[0]}.{stat?.player?.last_name}</td>
        <td className='p-2'>{stat?.min}</td>
        <td className='p-2'>{stat?.pts}</td>
        <td className='p-2'>{stat?.reb}</td>
